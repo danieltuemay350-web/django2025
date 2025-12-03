@@ -1,5 +1,3 @@
-
-
 while True:
 
     
@@ -42,4 +40,4 @@ while True:
            
             return result
         print(opration())
-s
+
