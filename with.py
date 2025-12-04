@@ -1,20 +1,19 @@
-"""
 
 
-    with open("calcultor/config.txt", "w") as file:
-        file.write('daniel is a good boy')
-    with open("calcultor/config.txt", "r") as file:
-        content = file.read()
-        print(content)
-
-
-"""
+with open("calcultor/config.txt", "w") as file:
+    file.write('daniel is a good boy')
+with open("calcultor/config.txt", "r") as file:
+    content = file.read()
+    print(content)
 
 
 
 
 
-path_config=r'calcultor/config.txt'
+
+
+
+path_config=r'config.txt'
 
 try:
     with open(path_config, "w") as file:
