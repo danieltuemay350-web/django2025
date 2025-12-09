@@ -8,7 +8,7 @@ to buy and prints:
 
 
 """
-#item = int(input("Enter the number of items you want to buy: "))
+item = int(input("Enter the number of items you want to buy: "))
 orginal_price = 20
 def discount():
     if item > 3:
@@ -275,7 +275,7 @@ Explanation: The square root of 4 is 2, so we return 2.
 sqr_num=int(input("enter a number and let us find the square root together : "))
 def root(sqr_num):
     if sqr_num<2:
-        return sqe_num
+        return sqr_num
     check=sqr_num
     while check*check>sqr_num:
         check=(check +sqr_num//check)//2
