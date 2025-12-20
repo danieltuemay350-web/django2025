@@ -1,0 +1,32 @@
+{% extends "todoapp/base.html" %}
+
+{% block title %}Todo: {{ todo.title }}{% endblock %}
+
+{% block content %}
+<div class="todo-detail">
+    <h1>{{ todo.title }}</h1>
+
+    {% if todo.description %}
+    <section class="todo-description">
+        <h2>Description</h2>
+        <p>{{ todo.description|linebreaks }}</p>
+    </section>
+    {% endif %}
+
+    <ul class="meta">
+        <li><strong>Status:</strong> {% if todo.completed %}Completed{% else %}Pending{% endif %}</li>
+        <li><strong>Created:</strong> {{ todo.created_at|date:"Y-m-d H:i" }}</li>
+        <li><strong>Updated:</strong> {{ todo.updated_at|date:"Y-m-d H:i" }}</li>
+    </ul>
+
+    <div class="actions">
+        <a class="btn" href="{% url 'todo_list' %}">Back to list</a>
+        <a class="btn" href="{% url 'todo_update' todo.pk %}">Edit</a>
+
+        <form action="{% url 'todo_delete' todo.pk %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this todo?');">Delete</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
