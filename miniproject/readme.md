@@ -17,31 +17,6 @@ python --version
 
 ```
 
----
-
-## Setup
-
-1. Download or clone the project
-```
-
-git clone <your-repo-url>
-
-```
-
-2. Go into the project folder
-```
-
-cd cli-todo-app
-
-```
-
-3. Make sure `tasks.json` exists  
-If not, create it and put:
-```
-
-[]
-
-```
 
 ---
 
@@ -53,7 +28,7 @@ python todo.py
 
 ```
 
-(or `python3 todo.py` if needed)
+(or `python3 todoapp.py` if needed)
 
 ---
 
@@ -106,5 +81,6 @@ exit
 > done 1
 > list
 > [✓] 1. Study Python
+
 
 ```
