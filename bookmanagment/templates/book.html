@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Library{% endblock %}</title>
+    
+    <!-- Add Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        'primary-dark': '#1d4ed8',
+                        secondary: '#111827',
+                        danger: '#dc2626',
+                        success: '#16a34a',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Your custom styles (optional) -->
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #111827;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        /* Custom utilities */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Custom button styles */
+        .btn-custom {
+            @apply px-4 py-2 rounded-lg font-medium transition-all duration-200;
+        }
+        
+        .btn-custom:hover {
+            transform: translateY(-1px);
+        }
+
+
+        /* ===== Base button ===== */
+.btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+
+/* ===== Primary ===== */
+.btn-primary {
+    background: #2563eb;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+
+/* ===== Success ===== */
+.btn-success {
+    background: #16a34a;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #15803d;
+}
+
+
+/* ===== Danger ===== */
+.btn-danger {
+    background: #dc2626;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #b91c1c;
+}
+
+
+/* ===== Outline ===== */
+.btn-outline {
+    background: transparent; 
+    border: 2px solid #2563eb;
+    color: #2563eb;
+}
+
+.btn-outline:hover {
+    background: #2563eb;
+    color: white;
+}
+
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+   <nav class="bg-gray-900 text-white shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">📚</span>
+                <a href="{% url 'bookhome' %}" class="text-xl font-bold hover:text-blue-300">
+                    Book Managment System
+                </a>
+            </div>
+
+            <!-- Navigation -->
+            <div class="flex items-center space-x-3">
+
+                <a href="{% url 'bookhome' %}" class="btn btn-outline">
+                    Home
+                </a>
+
+                <a href="{% url 'apilist' %}" class="btn btn-primary">
+                    Books api list
+                </a>
+
+                <a href="{% url 'bookapi' %}" class="btn btn-success">
+                    + Create using api
+                </a>
+
+                <!-- update/delete need an id → don't put them global -->
+                <!-- they belong inside book detail page -->
+
+                <a href="/admin/" class="btn btn-outline">
+                    Admin
+                </a>
+
+                {% if user.is_authenticated %}
+                    <span class="text-gray-400 text-sm ml-2">
+                        {{ user.username }}
+                    </span>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        {% if messages %}
+        <div class="mb-6 space-y-2">
+            {% for message in messages %}
+            <div class="rounded-lg p-4 {% if message.tags == 'success' %}bg-green-50 text-green-800 border border-green-200{% elif message.tags == 'error' %}bg-red-50 text-red-800 border border-red-200{% else %}bg-blue-50 text-blue-800 border border-blue-200{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-12">
+        <div class="container mx-auto px-4 py-8">
+            <div class="text-center text-gray-400">
+                <p>© {% now "Y" %} Library System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Scripts -->
+    <script>
+        // Add active class to current page link
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            document.querySelectorAll('nav a').forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('text-white', 'bg-gray-800');
+                    link.classList.remove('text-gray-300', 'hover:text-white');
+                }
+            });
+            
+            // Fade in animations
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('opacity-100', 'translate-y-0');
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
