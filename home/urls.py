@@ -22,6 +22,7 @@ urlpatterns = [
     path('school',include('School.urls')),
     path('Helpdesk',include('Helpdesk.urls')),
     path('blogpost',include('blogpost.urls')),
-    path('book',include('bookmanagment.urls'))
+    path('book',include('bookmanagment.urls')),
+    
 ]
  
