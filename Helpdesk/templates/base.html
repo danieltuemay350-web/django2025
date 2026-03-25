@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}My App{% endblock %}
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- simple styling -->
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6fa;
+        }
+
+        nav {
+            background: #222;
+            padding: 12px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: gray;
+            padding: 20px;
+        }
+
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+    </style>
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div>
+            <strong>Helpdesk</strong>
+        </div>
+
+        <div>
+            <a href="/">Home</a>
+            <a href="">my tickets</a>
+            <a href="">Members</a>
+            {% block nav_items %}{% endblock %}
+        </div>
+    </nav>
+
+
+    <!-- Main Content -->
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+    <footer>
+        © 2026 Library App
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>
