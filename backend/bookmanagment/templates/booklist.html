@@ -1,0 +1,112 @@
+{% extends "book.html" %}
+
+{% block title %}Books List{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+    <h1 class="mb-2">Books</h1>
+    <p class="text-muted">Browse our collection of books</p>
+</div>
+
+{% if books %}
+<div class="books-grid">
+    {% for book in books %}
+    <div class="card fade-in">
+        <div class="card-header" >
+            <h2 class="card-title">{{ book.title }}</h2>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><strong>Author:</strong> {{ book.author }}</p>
+            <p class="card-text-muted"><strong>ISBN:</strong> {{ book.isbn }}</p>
+            
+            {% if book.year %}
+            <p class="card-text"><strong>Year:</strong> {{ book.year }}</p>
+            {% endif %}
+            
+            {% if book.available %}
+            <span class="badge badge-success">Available</span>
+            {% else %}
+            <span class="badge badge-danger">Checked Out</span>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-between align-center">
+               <a href="{% url 'update' book.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'bookupdateapi' book.id %}" class="btn btn-success">API edit</a>
+
+                <a href="{% url 'bookdetail' book.id %}" class="btn btn-outline">
+                    View Details
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info">
+    <p>No books available in the library yet.</p>
+    <a href="{% url 'create' %}" class="btn btn-primary mt-2">Add First Book</a>
+</div>
+{% endif %}
+
+<!-- Add New Book Button -->
+<div class="mt-8 text-center">
+    <a href="{% url 'bookcreate' %}" class="btn btn-success btn-lg">
+        + Add New Book
+    </a>
+</div>
+
+<style>
+    .books-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    
+    .card-body {
+        flex: 1;
+    }
+    
+    .card-footer {
+        margin-top: auto;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+    
+    .badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    
+    .badge-success {
+        background: #dcfce7;
+        color: #166534;
+    }
+    
+    .badge-danger {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+    
+    .text-muted {
+        color: var(--text-light);
+    }
+    
+    .btn-lg {
+        padding: 0.75rem 2rem;
+        font-size: 1.125rem;
+    }
+</style>
+{% endblock %}

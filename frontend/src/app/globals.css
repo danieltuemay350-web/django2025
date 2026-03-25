@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bg: #f6f0e4;
+  --card: rgba(255, 250, 243, 0.82);
+  --card-strong: #f5ecdf;
+  --ink: #201c1a;
+  --muted: #71655d;
+  --line: rgba(118, 95, 78, 0.18);
+  --ember: #b2402e;
+  --jade: #1f6b5f;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  @apply font-sans antialiased;
+  min-height: 100%;
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at top left, rgba(178, 64, 46, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(31, 107, 95, 0.12), transparent 24%),
+    radial-gradient(circle at bottom right, rgba(178, 64, 46, 0.1), transparent 30%),
+    linear-gradient(180deg, rgba(255, 250, 243, 0.94), rgba(246, 240, 228, 0.98));
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(118, 95, 78, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(118, 95, 78, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 92%);
+  z-index: -1;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(118, 95, 78, 0.45) transparent;
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(178, 64, 46, 0.18);
+}
+
+@layer components {
+  .panel-surface {
+    @apply rounded-[2rem] border shadow-panel backdrop-blur;
+    border-color: var(--line);
+    background: var(--card);
+  }
+
+  .orb {
+    position: fixed;
+    width: 18rem;
+    height: 18rem;
+    border-radius: 9999px;
+    filter: blur(90px);
+    pointer-events: none;
+    opacity: 0.6;
+    z-index: -1;
+  }
+
+  .orb-left {
+    left: -4rem;
+    top: 8rem;
+    background: rgba(178, 64, 46, 0.18);
+  }
+
+  .orb-right {
+    right: -5rem;
+    top: 14rem;
+    background: rgba(31, 107, 95, 0.16);
+  }
+}
